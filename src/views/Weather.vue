@@ -1,7 +1,7 @@
 <template>
-    <div @click="handleClick">
-        <div>Weather view</div>
-        <weather-item
+    <div>
+        <span class="mdi mdi-cog fab-button" @click="handleClick"></span>
+        <weather-card
             v-for="(location, index) in locations"
             :key="index"
             :location-name="location"
@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import WeatherItem from "@/components/Weather/WeatherItem";
+import WeatherCard from "@/components/Weather/WeatherCard";
 
 export default {
     components: {
-        WeatherItem,
+        WeatherCard,
     },
     computed: {
         locations() {

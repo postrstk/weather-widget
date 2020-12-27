@@ -1,6 +1,5 @@
 <template>
     <div>
-        Settings view
         <draggable v-model="locations" handle=".handleDnD">
             <div v-for="item in locations" :key="item" style="display:flex;">
                 <div
@@ -14,33 +13,24 @@
                 ></div>
             </div>
         </draggable>
-        <div
+        <span
             @click="handleClick"
-            style="background-color: blue; color: white; width: 300px; height:60px;"
+            class="mdi mdi-close fab-button"
         >
-            button for back
-        </div>
-        <div>
-            <input
-                v-model="new_location"
-                @submit="handleSubmitNewLocation"
-                @keydown.enter="handleSubmitNewLocation"
-            />
-        </div>
+        </span>
+        <input-location @submit="handleSubmitNewLocation"/>
     </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
 
+import InputLocation from "@/components/Settings/InputLocation"
+
 export default {
     components: {
         draggable,
-    },
-    data() {
-        return {
-            new_location: "",
-        };
+        InputLocation,
     },
     computed: {
         locations: {
@@ -65,12 +55,11 @@ export default {
                 payload: this.locations.indexOf(item),
             });
         },
-        handleSubmitNewLocation() {
+        handleSubmitNewLocation(new_location) {
             this.$store.dispatch("updateLocations", {
                 type: "addLocation",
-                payload: this.new_location,
+                payload: new_location,
             });
-            this.new_location = "";
         },
     },
 };

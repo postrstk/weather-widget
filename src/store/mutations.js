@@ -23,7 +23,7 @@ export default {
         let updated_object = state.locations_weather[location];
 
         if(!status) {
-            updated_object.setCountry("Uncorrect location");
+            updated_object.setCountry("Not found");
             return;
         }
         console.log(location)
@@ -36,6 +36,7 @@ export default {
         updated_object.setPressure(payload.pressure);
         updated_object.setHumidity(payload.humidity);
         updated_object.setWindSpeed(payload.wind_speed);
+        updated_object.setVisibility(payload.visibility);
         updated_object.setWindDeg(payload.wind_deg);
         updated_object.setIconCode(payload.icon_code);
         updated_object.setDescription(payload.description);

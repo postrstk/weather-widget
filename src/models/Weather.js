@@ -10,6 +10,7 @@ class Weather {
         this._temperature_min = 0;
         this._pressure = 0;
         this._humidity = 0;
+        this._visibility = 0;
         this._wind_speed = 0;
         this._wind_deg = 0;
         this._description = "";
@@ -44,7 +45,7 @@ class Weather {
         this._temperature_feels_like = Math.round(value_in_kelvin - 273.15);
     }
     temperatureFeelsLike() {
-        return this._temperature_feels_like + "°C";
+        return `Feels like ${this._temperature_feels_like}°C`;
     }
 
     setTemperatureMax(value_in_kelvin) {
@@ -61,6 +62,11 @@ class Weather {
         return this._temperature_min + "°C";
     }
 
+
+    temperatureMinMax() {
+        return `${this._temperature_min}..${this._temperature_max}`
+    }
+
     pressure() {
         return this._pressure + "hPa";
     }
@@ -73,6 +79,13 @@ class Weather {
     }
     setHumidity(value) {
         this._humidity = value;
+    }
+
+    visibility() {
+        return (this._visibility/1000).toFixed(1) + "km";
+    }
+    setVisibility(value) {
+        this._visibility = value;
     }
 
     windSpeed() {
@@ -93,7 +106,9 @@ class Weather {
         this._description = value;
     }
     description() {
-        return this._description;
+        if (!this._description) return this._description;
+        //Title case
+        return this._description[0].toUpperCase() + this._description.slice(1);
     }
 
     setMain(value) {

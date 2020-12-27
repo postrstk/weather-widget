@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#app {
+    position: relative;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #2c3e50;
+    max-width: 200px;
+}
+
+.fab-button {
+    position: fixed;
+    font-size: 20pt;
+    right: 10px;
+    top: 10px;
+}
+
+@import "@/assets/scss/weather-card.scss";
