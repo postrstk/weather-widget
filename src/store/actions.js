@@ -25,5 +25,20 @@ export default {
 
     setUserLocations(context) {
         updateLocations(context.getters.locations);
-    }
+    },
+
+    addLocation({dispatch, commit}, payload) {
+        commit("addLocation", payload);
+        dispatch("setUserLocations");
+    },
+
+    removeLocation({dispatch, commit}, payload) {
+        commit("removeLocation", payload);
+        dispatch("setUserLocations");
+    },
+
+    updateLocationsOrder({dispatch, commit}, payload) {
+        commit("updateLocationsOrder", payload);
+        dispatch("setUserLocations");
+    },
 };

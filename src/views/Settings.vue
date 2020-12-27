@@ -20,6 +20,13 @@
         >
             button for back
         </div>
+        <div>
+            <input
+                v-model="new_location"
+                @submit="handleSubmitNewLocation"
+                @keydown.enter="handleSubmitNewLocation"
+            />
+        </div>
     </div>
 </template>
 
@@ -30,13 +37,18 @@ export default {
     components: {
         draggable,
     },
+    data() {
+        return {
+            new_location: "",
+        };
+    },
     computed: {
         locations: {
             get() {
                 return this.$store.getters.locations;
             },
             set(value) {
-                this.$store.commit("updateLocationsOrder", value);
+                this.$store.dispatch("updateLocationsOrder", value);
             },
         },
     },
@@ -45,8 +57,12 @@ export default {
             this.$router.push({ name: "Weather" });
         },
         handleRemoveLocation(item) {
-            this.$store.commit("removeLocation", item);
-        }
+            this.$store.dispatch("removeLocation", item);
+        },
+        handleSubmitNewLocation() {
+            this.$store.dispatch("addLocation", this.new_location);
+            this.new_location = "";
+        },
     },
 };
 </script>
