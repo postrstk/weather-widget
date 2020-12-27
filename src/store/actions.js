@@ -7,15 +7,17 @@ export default {
     async fetchWeather(context, location) {
         context;
         let response = await fetch(openWeatherFetchUrl(location));
+        let result_dict = {
+            location: location,
+            status: response.ok
+        }
         if (response.ok) {
             let json = await response.json();
-            context.commit("updateLocationWeather", {
-                location: location,
-                payload: openWeatherResponseParser(json),
-            });
+            result_dict.payload = openWeatherResponseParser(json);
         } else {
             console.log("HTTP Error: " + response.status);
         }
+        context.commit("updateLocationWeather", result_dict);
     },
 
     getUserLocations(context) {

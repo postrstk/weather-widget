@@ -24,11 +24,6 @@ export default {
     data() {
         return {};
     },
-    mounted() {
-        if (this.locations.length === 0) {
-            this.$store.dispatch("getUserLocations");
-        }
-    },
     methods: {
         handleClick() {
             this.$router.push({name: 'Settings'})

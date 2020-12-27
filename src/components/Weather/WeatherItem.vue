@@ -1,7 +1,11 @@
 <template>
-    <div>
-        {{ location_weather.location() }} : {{ location_weather.temperature() }}
+    <div v-if="location_weather.isFetched()">
+        {{ location_weather.location() }} :
+        {{ location_weather.temperature() }}
         <img :src="icon_src" />
+    </div>
+    <div v-else>
+        {{ location_weather.location() }}
     </div>
 </template>
 
@@ -23,11 +27,6 @@ export default {
             if (!this.location_weather.iconCode()) return "";
             return IconUrl(this.location_weather.iconCode());
         },
-    },
-    data() {
-        return {
-            own_location_name: "",
-        };
     },
     mounted() {
         if (!this.location_weather.isFetched()) {

@@ -62,7 +62,7 @@ export default {
         handleRemoveLocation(item) {
             this.$store.dispatch("updateLocations", {
                 type: "removeLocation",
-                payload: item,
+                payload: this.locations.indexOf(item),
             });
         },
         handleSubmitNewLocation() {

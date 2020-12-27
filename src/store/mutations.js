@@ -10,8 +10,8 @@ export default {
         }
     },
 
-    removeLocation(state, location) {
-        state.locations_order = state.locations_order.filter(el => el !== location);
+    removeLocation(state, index) {
+        state.locations_order = state.locations_order.filter((_, idx) => idx !== index);
         delete state.locations_weather[location];
     },
 
@@ -19,9 +19,14 @@ export default {
         state.locations_order = new_order;
     },
 
-    updateLocationWeather(state, { location, payload }) {
+    updateLocationWeather(state, { location, payload, status}) {
         let updated_object = state.locations_weather[location];
 
+        if(!status) {
+            updated_object.setCountry("Uncorrect location");
+            return;
+        }
+        console.log(location)
         updated_object.setFetched();
         updated_object.setCountry(payload.country);
         updated_object.setTemperature(payload.temperature);
