@@ -48,7 +48,10 @@ export default {
                 return this.$store.getters.locations;
             },
             set(value) {
-                this.$store.dispatch("updateLocationsOrder", value);
+                this.$store.dispatch("updateLocations", {
+                    type: "updateLocationsOrder",
+                    payload: value,
+                });
             },
         },
     },
@@ -57,10 +60,16 @@ export default {
             this.$router.push({ name: "Weather" });
         },
         handleRemoveLocation(item) {
-            this.$store.dispatch("removeLocation", item);
+            this.$store.dispatch("updateLocations", {
+                type: "removeLocation",
+                payload: item,
+            });
         },
         handleSubmitNewLocation() {
-            this.$store.dispatch("addLocation", this.new_location);
+            this.$store.dispatch("updateLocations", {
+                type: "addLocation",
+                payload: this.new_location,
+            });
             this.new_location = "";
         },
     },
