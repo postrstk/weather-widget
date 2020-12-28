@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+@import "@/assets/scss/constants.scss";
+
 body {
     display: flex;
     justify-content: center;
@@ -5,18 +9,21 @@ body {
 }
 #app {
     position: relative;
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
-    color: #2c3e50;
+    color: $text-color;
     max-width: 200px;
 }
 
 .fab-button {
     position: fixed;
-    font-size: 20pt;
+    font-size: $icon-font-size;
+    color: $text-color;
     right: 10px;
     top: 10px;
 }
 
-@import "@/assets/scss/weather-card.scss";
-@import "@/assets/scss/settings.scss";
+@import "@/assets/scss/weather-card/weather-card.scss";
+@import "@/assets/scss/settings-card/input-location.scss";
+@import "@/assets/scss/settings-card/location-list-item.scss";
+@import "@/assets/scss/settings-card/settings.scss";

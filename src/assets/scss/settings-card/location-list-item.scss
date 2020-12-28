@@ -1,0 +1,20 @@
+.location-list-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 10px 0;
+    padding: 10px 5px;
+
+    background-color: $card-main-color;
+    color: $light-text-color;
+
+    border-radius: $card-radius;
+
+    &__drag-icon {
+        font-size: $icon-font-size;
+    }
+    &__remove-icon {
+        font-size: $icon-font-size;
+        margin-left: auto;
+    }
+}

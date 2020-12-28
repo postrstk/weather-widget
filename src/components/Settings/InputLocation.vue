@@ -1,5 +1,8 @@
 <template>
     <div class="input-location">
+        <div class="input-location__title">
+            Add location:
+        </div>
         <input
             v-model="new_location"
             class="input-location__input"
@@ -16,14 +19,14 @@
 export default {
     data() {
         return {
-            new_location: ""
-        }
+            new_location: "",
+        };
     },
     methods: {
         handleSubmit() {
             this.$emit("submit", this.new_location);
             this.new_location = "";
-        }
-    }
+        },
+    },
 };
 </script>

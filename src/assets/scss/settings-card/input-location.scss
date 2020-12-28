@@ -1,0 +1,27 @@
+.input-location {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+    margin-top: 10px;
+
+    &__title {
+        width: 100%;
+        font-weight: bold;
+        text-align: start;
+    }
+
+    &__input {
+        outline: 1px solid $text-color;
+        border: none;
+        padding: 0 6px;
+    }
+    &__input:focus {
+        outline: 1px solid $card-main-color;
+    }
+
+    &__icon {
+        margin-left: auto;
+        font-size: $icon-font-size;
+    }
+}
