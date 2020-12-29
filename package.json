@@ -7,12 +7,11 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "widget": "vue-cli-service build --target wc --dest widget --name weather-widget src/App.vue",
-    "widget-ext": "vue-cli-service build --target wc --dest widget-ext --name weather-widget"
+    "widget-vue": "vue-cli-service build --target wc --inline-vue --dest widget-vue --name weather-widget src/App.vue"
   },
   "dependencies": {
     "@mdi/js": "^5.8.55",
     "core-js": "^3.6.5",
-    "css-loader": "^5.0.1",
     "mdi-vue": "^2.2.0",
     "vue": "^2.6.11",
     "vuedraggable": "^2.24.3",

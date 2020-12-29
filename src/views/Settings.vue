@@ -1,24 +1,26 @@
 <template>
     <div class="settings-card">
         <span class="settings-card__title"> Settings </span>
-        <draggable
-            v-if="locations.length"
-            v-model="locations"
-            handle=".location-list-item__drag-icon"
-            class="settings-card__title"
-            :name="!drag ? 'flip-list' : null"
-            v-bind="dragOptions"
-            @start="drag = true"
-            @end="drag = false"
-        >
-            <location-list-item
-                v-for="item in locations"
-                :key="item"
-                :location-name="item"
-                @remove="handleRemoveLocation(item)"
-            />
-        </draggable>
-        <empty-locations-list v-else />
+        <transition name="slide-fade" mode="out-in">
+            <draggable
+                v-if="locations.length"
+                v-model="locations"
+                handle=".location-list-item__drag-icon"
+                class="settings-card__title"
+                :name="!drag ? 'flip-list' : null"
+                v-bind="dragOptions"
+                @start="drag = true"
+                @end="drag = false"
+            >
+                <location-list-item
+                    v-for="item in locations"
+                    :key="item"
+                    :location-name="item"
+                    @remove="handleRemoveLocation(item)"
+                />
+            </draggable>
+            <empty-locations-list v-else />
+        </transition>
         <input-location @submit="handleSubmitNewLocation" />
     </div>
 </template>
