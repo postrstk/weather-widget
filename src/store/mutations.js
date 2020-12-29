@@ -3,10 +3,10 @@ import Vue from "vue";
 import Weather from "@/models/Weather";
 
 export default {
-    addLocation(state, value) {
+    addLocation(state, {value, weather}) {
         if (!(value in Object.keys(state.locations_weather))) {
             state.locations_order.push(value);
-            Vue.set(state.locations_weather, value, new Weather(value));
+            Vue.set(state.locations_weather, value, weather ?? new Weather(value));
         }
     },
 
@@ -19,26 +19,7 @@ export default {
         state.locations_order = new_order;
     },
 
-    updateLocationWeather(state, { location, payload, status}) {
-        let updated_object = state.locations_weather[location];
-
-        if(!status) {
-            updated_object.setCountry("Not found");
-            return;
-        }
-        updated_object.setFetched();
-        updated_object.setCountry(payload.country);
-        updated_object.setTemperature(payload.temperature);
-        updated_object.setTemperatureFeelsLike(payload.temperature_feels_like);
-        updated_object.setTemperatureMax(payload.temperature_max);
-        updated_object.setTemperatureMin(payload.temperature_min);
-        updated_object.setPressure(payload.pressure);
-        updated_object.setHumidity(payload.humidity);
-        updated_object.setWindSpeed(payload.wind_speed);
-        updated_object.setVisibility(payload.visibility);
-        updated_object.setWindDeg(payload.wind_deg);
-        updated_object.setIconCode(payload.icon_code);
-        updated_object.setDescription(payload.description);
-        updated_object.setMain(payload.main);
+    updateLocationWeather(state, {location, new_weather_object}) {
+        Vue.set(state.locations_weather, location, new_weather_object ?? new Weather(location))
     },
 };

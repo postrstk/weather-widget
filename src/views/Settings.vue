@@ -51,7 +51,7 @@ export default {
                 return this.$store.getters.locations;
             },
             set(value) {
-                this.$store.dispatch("updateLocations", {
+                this.$store.dispatch("syncUpdateLocations", {
                     type: "updateLocationsOrder",
                     payload: value,
                 });
@@ -60,13 +60,13 @@ export default {
     },
     methods: {
         handleRemoveLocation(item) {
-            this.$store.dispatch("updateLocations", {
+            this.$store.dispatch("syncUpdateLocations", {
                 type: "removeLocation",
                 payload: this.locations.indexOf(item),
             });
         },
         handleSubmitNewLocation(new_location) {
-            this.$store.dispatch("updateLocations", {
+            this.$store.dispatch("syncUpdateLocations", {
                 type: "addLocation",
                 payload: new_location,
             });

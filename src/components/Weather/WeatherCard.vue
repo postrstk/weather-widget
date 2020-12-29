@@ -78,7 +78,7 @@ export default {
         },
     },
     mounted() {
-        if (!this.location_weather.isFetched()) {
+        if (this.location_weather && !this.location_weather.isFetched()) {
             this.$store.dispatch("fetchWeather", this.LocationName);
         }
     },

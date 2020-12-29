@@ -3,7 +3,7 @@ class Weather {
         this._is_fetched = false;
         this._location_name = location_name;
         this._temperature = 0;
-        this._country = "";
+        this._country = "Not Found";
         this._temperature = 0;
         this._temperature_feels_like = 0;
         this._temperature_max = 0;
@@ -28,6 +28,10 @@ class Weather {
 
     location() {
         return `${this._location_name}, ${this._country}`;
+    }
+
+    locationName() {
+        return this._location_name;
     }
 
     setCountry(value) {

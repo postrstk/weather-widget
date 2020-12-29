@@ -5,6 +5,7 @@ const parseWindDegValue = (wind_deg) => {
 
 export default (response_json) => {
     return {
+        location_name: response_json.name,
         country: response_json.sys.country,
         temperature: response_json.main.temp,
         temperature_feels_like: response_json.main.feels_like,

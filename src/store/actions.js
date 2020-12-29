@@ -1,48 +1,52 @@
-import openWeatherResponseParser from "@/utils/openWeatherAPI/responseParser";
 import {
-    fetchByLocationUrl,
-    fetchByCoordinatesUrl,
-} from "@/utils/openWeatherAPI/fetchUrl";
+    buildWeatherByCoordinates,
+    buildWeatherByLocation
+} from "@/utils/weatherBuilder";
 import { fetchLocations, updateLocations } from "@/utils/localStorage";
+import userCoordinates from "@/utils/geolocation";
 
 export default {
     async fetchWeather(context, location) {
-        fetchByCoordinatesUrl;
-        console.log(fetchByLocationUrl(location))
-        let response = await fetch(fetchByLocationUrl(location));
-        let result_dict = {
-            location: location,
-            status: response.ok,
-        };
-        if (response.ok) {
-            let json = await response.json();
-            result_dict.payload = openWeatherResponseParser(json);
-        } else {
-            console.log("HTTP Error: " + response.status);
-        }
-        context.commit("updateLocationWeather", result_dict);
+        let new_weather_object = await buildWeatherByLocation(location);
+        context.commit("updateLocationWeather", {location, new_weather_object});
     },
 
-    getUserLocations(context) {
-        // context;
-        // if (window.navigator.geolocation) {
-        //     window.navigator.geolocation.getCurrentPosition(
-        //         console.log,
-        //         console.log,
-        //     );
-        // }
-
-        // fetchLocations();
-        let locations = fetchLocations() ?? [];
-        locations.forEach(location => context.commit("addLocation", location));
+    async getUserLocations({dispatch, commit}) {
+        let locations = fetchLocations();
+        if (locations && locations.length > 0) {
+            locations.forEach((location) => commit("addLocation", {value: location}));
+        } else {
+            let coords = await userCoordinates();
+            if (coords) {
+                let new_weather_obj = await buildWeatherByCoordinates(coords);
+                commit("addLocation", {
+                    value: new_weather_obj.locationName(),
+                    weather: new_weather_obj,
+                });
+                dispatch("setUserLocations");
+            }
+        }
     },
 
     setUserLocations(context) {
         updateLocations(context.getters.locations);
     },
 
-    updateLocations({ dispatch, commit }, { type, payload }) {
-        commit(type, payload);
+    async syncUpdateLocations({ dispatch, commit }, { type, payload }) {
+        switch (type) {
+            case "addLocation": {
+                let new_weather_obj = await buildWeatherByLocation(payload);
+                commit("addLocation", {
+                    value: new_weather_obj ? new_weather_obj.locationName() : payload,
+                    weather: new_weather_obj,
+                });
+                break;
+            }
+            case "removeLocation":
+            case "updateLocationsOrder":
+                commit(type, payload);
+                break;
+        }
         dispatch("setUserLocations");
     },
 };
