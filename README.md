@@ -4,6 +4,14 @@
 ```
 npm install
 ```
+### Compiles as web component (without vue)
+```
+npm run widget
+```
+### Compiles as web component (vue includes)
+```
+npm run widget-vue
+```
 
 ### Compiles and hot-reloads for development
 ```
