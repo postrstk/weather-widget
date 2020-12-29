@@ -1,6 +1,5 @@
 <template>
     <div>
-        <span class="mdi mdi-cog fab-button" @click="handleClick"></span>
         <weather-card
             v-for="(location, index) in locations"
             :key="index"
@@ -11,8 +10,12 @@
 
 <script>
 import WeatherCard from "@/components/Weather/WeatherCard";
+import store from "@/store";
+import router from "@/router"
 
 export default {
+    store,
+    router,
     components: {
         WeatherCard,
     },
@@ -21,13 +24,5 @@ export default {
             return this.$store.getters.locations;
         },
     },
-    data() {
-        return {};
-    },
-    methods: {
-        handleClick() {
-            this.$router.push({name: 'Settings'})
-        }
-    }
 };
 </script>

@@ -9,9 +9,11 @@
             @keydown.enter="handleSubmit"
         />
         <span
-            class="mdi mdi-subdirectory-arrow-left input-location__icon"
+            class="input-location__icon"
             @click="handleSubmit"
-        ></span>
+        >
+            <mdicon name="subdirectoryArrowLeft" />
+        </span>
     </div>
 </template>
 

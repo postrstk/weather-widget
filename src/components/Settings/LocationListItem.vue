@@ -1,13 +1,17 @@
 <template>
     <div class="location-list-item">
         <div class="location-list-item__drag-icon">
-            <span class="mdi mdi-menu"></span>
+            <span>
+                <mdicon name="menu" />
+            </span>
         </div>
         <div class="location-list-item__text">
             {{ LocationName }}
         </div>
         <div class="location-list-item__remove-icon" @click="handleClick">
-            <span class="mdi mdi-delete"></span>
+            <span>
+                <mdicon name="delete" />
+            </span>
         </div>
     </div>
 </template>

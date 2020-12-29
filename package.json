@@ -5,12 +5,15 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "widget": "vue-cli-service build --target wc --dest widget --name weather-widget src/App.vue",
+    "widget-ext": "vue-cli-service build --target wc --dest widget-ext --name weather-widget"
   },
   "dependencies": {
-    "@mdi/font": "^5.8.55",
     "@mdi/js": "^5.8.55",
     "core-js": "^3.6.5",
+    "css-loader": "^5.0.1",
+    "mdi-vue": "^2.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuedraggable": "^2.24.3",
@@ -23,6 +26,7 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/web-component-wrapper": "^1.2.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",

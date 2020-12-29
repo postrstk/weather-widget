@@ -13,7 +13,6 @@
                 @remove="handleRemoveLocation(item)"
             />
         </draggable>
-        <span @click="handleClick" class="mdi mdi-close fab-button"> </span>
         <input-location @submit="handleSubmitNewLocation" />
     </div>
 </template>
@@ -44,9 +43,6 @@ export default {
         },
     },
     methods: {
-        handleClick() {
-            this.$router.push({ name: "Weather" });
-        },
         handleRemoveLocation(item) {
             this.$store.dispatch("updateLocations", {
                 type: "removeLocation",

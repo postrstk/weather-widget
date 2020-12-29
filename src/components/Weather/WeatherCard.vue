@@ -18,25 +18,34 @@
             </div>
             <div class="weather-card__parameters">
                 <div class="parameters__value-box">
-                    <span class="mdi mdi-weather-windy"></span>
+                    <span>
+                        <mdicon name="weatherWindy" :size="20" />
+                    </span>
                     <span class="parameters__text">
-                        Wind: {{ location_weather.windSpeed() }} {{ location_weather.windDeg() }}.
+                        Wind: {{ location_weather.windSpeed() }}
+                        {{ location_weather.windDeg() }}.
                     </span>
                 </div>
                 <div class="parameters__value-box">
-                    <span class="mdi mdi-speedometer"></span>
+                    <span>
+                        <mdicon name="speedometer" :size="20" />
+                    </span>
                     <span class="parameters__text">
                         Pressure: {{ location_weather.pressure() }}.
                     </span>
                 </div>
                 <div class="parameters__value-box">
-                    <span class="mdi mdi-water"></span>
+                    <span>
+                        <mdicon name="water" :size="20" />
+                    </span>
                     <span class="parameters__text">
                         Humidity: {{ location_weather.humidity() }}.
                     </span>
                 </div>
                 <div class="parameters__value-box">
-                    <span class="mdi mdi-eye"></span>
+                    <span>
+                        <mdicon name="eye" :size="20" />
+                    </span>
                     <span class="parameters__text">
                         Visibility: {{ location_weather.visibility() }}.
                     </span>

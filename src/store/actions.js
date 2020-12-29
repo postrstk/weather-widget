@@ -21,7 +21,7 @@ export default {
     },
 
     getUserLocations(context) {
-        let locations = fetchLocations();
+        let locations = fetchLocations() ?? [];
         locations.forEach(location => context.commit("addLocation", location));
     },
 
