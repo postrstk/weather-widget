@@ -8,7 +8,7 @@ npm install
 ```
 npm run widget
 ```
-### Compiles as web component (vue includes)
+### Compiles as web component (including vue)
 ```
 npm run widget-vue
 ```
