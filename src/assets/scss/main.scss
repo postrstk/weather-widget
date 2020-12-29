@@ -17,12 +17,12 @@ body {
     font-family: $font-family-main;
     text-align: center;
     color: $text-color;
-    max-width: 200px;
+    max-width: 220px;
 }
 
 .right-bar {
     position: relative;
-    width: 1px;
+    width:fit-content;
 
     &__fab-button {
         position: sticky;

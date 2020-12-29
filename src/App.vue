@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-        <router-view />
+        <Settings v-if="showSettings"/>
+        <Weather v-else/>
         <aside class="right-bar">
             <span class="right-bar__fab-button" @click="handleClick">
                 <mdicon :name="icon" />
@@ -12,29 +13,33 @@
 <script>
 import "@/plugins/icons";
 import store from "@/store";
-import router from "@/router";
+
+import Weather from "@/views/Weather";
+import Settings from "@/views/Settings";
 
 export default {
     store,
-    router,
     name: "App",
+    components: {
+        Weather,
+        Settings,
+    },
+    data() {
+        return {
+            showSettings: false,
+        }
+    },
     mounted() {
         this.$store.dispatch("getUserLocations");
-        this.$router.push("/");
     },
     computed: {
-        next_route_name() {
-            if (this.$route.name === "Weather") return "Settings";
-            return "Weather";
-        },
         icon() {
-            if (this.next_route_name === "Weather") return "close";
-            return "cog";
+            return this.showSettings ? "close" : "cog";
         },
     },
     methods: {
         handleClick() {
-            this.$router.push({ name: this.next_route_name });
+            this.showSettings = !this.showSettings;
         },
     },
 };
