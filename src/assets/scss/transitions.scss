@@ -1,0 +1,31 @@
+/*
+    Transitions between Weather and Settings views
+*/
+.slide-fade {
+    &-enter-active,
+    &-leave-active {
+        transition: all 0.3s ease;
+    }
+    &-leave-to {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    &-enter {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
+/*
+    Animate DnD list at Settings
+*/
+.flip-list-move {
+    transition: transform 0.5s;
+}
+.no-move {
+    transition: transform 0s;
+}
+.ghost {
+    opacity: 0.5;
+    background: #c8ebfb;
+}
