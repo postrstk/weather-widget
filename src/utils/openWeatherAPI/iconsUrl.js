@@ -1,3 +1,5 @@
+import { SERVICE_URL } from "@/config/openWeatherAPI";
+
 export default (icon_code) => {
-    return  `http://openweathermap.org/img/wn/${icon_code}@2x.png`
+    return `${SERVICE_URL}/img/wn/${icon_code}@2x.png`;
 };

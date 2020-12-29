@@ -26,7 +26,6 @@ export default {
             updated_object.setCountry("Not found");
             return;
         }
-        console.log(location)
         updated_object.setFetched();
         updated_object.setCountry(payload.country);
         updated_object.setTemperature(payload.temperature);
