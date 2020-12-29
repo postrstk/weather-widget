@@ -16,6 +16,7 @@
 <script>
 import "@/plugins/icons";
 import store from "@/store";
+import { GET_USER_LOCATIONS } from "@/store/actionsType";
 
 import Weather from "@/views/Weather";
 import Settings from "@/views/Settings";
@@ -33,7 +34,7 @@ export default {
         };
     },
     mounted() {
-        this.$store.dispatch("getUserLocations");
+        this.$store.dispatch(GET_USER_LOCATIONS);
     },
     computed: {
         icon() {

@@ -1,52 +1,73 @@
 import {
     buildWeatherByCoordinates,
-    buildWeatherByLocation
+    buildWeatherByLocation,
 } from "@/utils/weatherBuilder";
 import { fetchLocations, updateLocations } from "@/utils/localStorage";
 import userCoordinates from "@/utils/geolocation";
 
+import {
+    FETCH_WEATHER,
+    GET_USER_LOCATIONS,
+    SET_USER_LOCATIONS,
+    SYNC_UPDATE_LOCATIONS,
+} from "./actionsType";
+
+import {
+    ADD_LOCATION,
+    REMOVE_LOCATION,
+    UPDATE_LOCATIONS_ORDER,
+    UPDATE_LOCATION_WEATHER,
+} from "./mutationsType";
+
 export default {
-    async fetchWeather(context, location) {
+    async [FETCH_WEATHER](context, location) {
         let new_weather_object = await buildWeatherByLocation(location);
-        context.commit("updateLocationWeather", {location, new_weather_object});
+        context.commit(UPDATE_LOCATION_WEATHER, {
+            location,
+            new_weather_object,
+        });
     },
 
-    async getUserLocations({dispatch, commit}) {
+    async [GET_USER_LOCATIONS]({ dispatch, commit }) {
         let locations = fetchLocations();
         if (locations && locations.length > 0) {
-            locations.forEach((location) => commit("addLocation", {value: location}));
+            locations.forEach((location) =>
+                commit(ADD_LOCATION, { value: location }),
+            );
         } else {
             let coords = await userCoordinates();
             if (coords) {
                 let new_weather_obj = await buildWeatherByCoordinates(coords);
-                commit("addLocation", {
+                commit(ADD_LOCATION, {
                     value: new_weather_obj.locationName(),
                     weather: new_weather_obj,
                 });
-                dispatch("setUserLocations");
+                dispatch(SET_USER_LOCATIONS);
             }
         }
     },
 
-    setUserLocations(context) {
+    [SET_USER_LOCATIONS](context) {
         updateLocations(context.getters.locations);
     },
 
-    async syncUpdateLocations({ dispatch, commit }, { type, payload }) {
+    async [SYNC_UPDATE_LOCATIONS]({ dispatch, commit }, { type, payload }) {
         switch (type) {
-            case "addLocation": {
+            case ADD_LOCATION: {
                 let new_weather_obj = await buildWeatherByLocation(payload);
-                commit("addLocation", {
-                    value: new_weather_obj ? new_weather_obj.locationName() : payload,
+                commit(ADD_LOCATION, {
+                    value: new_weather_obj
+                        ? new_weather_obj.locationName()
+                        : payload,
                     weather: new_weather_obj,
                 });
                 break;
             }
-            case "removeLocation":
-            case "updateLocationsOrder":
+            case REMOVE_LOCATION:
+            case UPDATE_LOCATIONS_ORDER:
                 commit(type, payload);
                 break;
         }
-        dispatch("setUserLocations");
+        dispatch(SET_USER_LOCATIONS);
     },
 };

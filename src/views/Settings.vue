@@ -32,6 +32,13 @@ import InputLocation from "@/components/Settings/InputLocation";
 import LocationListItem from "@/components/Settings/LocationListItem";
 import EmptyLocationsList from "@/components/Settings/EmptyLocationsList";
 
+import { SYNC_UPDATE_LOCATIONS } from "@/store/actionsType";
+import {
+    ADD_LOCATION,
+    REMOVE_LOCATION,
+    UPDATE_LOCATIONS_ORDER,
+} from "@/store/mutationsType";
+
 export default {
     components: {
         draggable,
@@ -57,8 +64,8 @@ export default {
                 return this.$store.getters.locations;
             },
             set(value) {
-                this.$store.dispatch("syncUpdateLocations", {
-                    type: "updateLocationsOrder",
+                this.$store.dispatch(SYNC_UPDATE_LOCATIONS, {
+                    type: UPDATE_LOCATIONS_ORDER,
                     payload: value,
                 });
             },
@@ -66,14 +73,14 @@ export default {
     },
     methods: {
         handleRemoveLocation(item) {
-            this.$store.dispatch("syncUpdateLocations", {
-                type: "removeLocation",
+            this.$store.dispatch(SYNC_UPDATE_LOCATIONS, {
+                type: REMOVE_LOCATION,
                 payload: this.locations.indexOf(item),
             });
         },
         handleSubmitNewLocation(new_location) {
-            this.$store.dispatch("syncUpdateLocations", {
-                type: "addLocation",
+            this.$store.dispatch(SYNC_UPDATE_LOCATIONS, {
+                type: ADD_LOCATION,
                 payload: new_location,
             });
         },

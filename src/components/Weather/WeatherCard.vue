@@ -60,6 +60,7 @@
 
 <script>
 import IconUrl from "@/utils/openWeatherAPI/iconsUrl";
+import { FETCH_WEATHER } from "@/store/actionsType";
 
 export default {
     props: {
@@ -79,7 +80,7 @@ export default {
     },
     mounted() {
         if (this.location_weather && !this.location_weather.isFetched()) {
-            this.$store.dispatch("fetchWeather", this.LocationName);
+            this.$store.dispatch(FETCH_WEATHER, this.LocationName);
         }
     },
 };

@@ -1,25 +1,41 @@
 import Vue from "vue";
 
 import Weather from "@/models/Weather";
+import {
+    ADD_LOCATION,
+    REMOVE_LOCATION,
+    UPDATE_LOCATIONS_ORDER,
+    UPDATE_LOCATION_WEATHER,
+} from "./mutationsType";
 
 export default {
-    addLocation(state, {value, weather}) {
+    [ADD_LOCATION](state, { value, weather }) {
         if (!(value in Object.keys(state.locations_weather))) {
             state.locations_order.push(value);
-            Vue.set(state.locations_weather, value, weather ?? new Weather(value));
+            Vue.set(
+                state.locations_weather,
+                value,
+                weather ?? new Weather(value),
+            );
         }
     },
 
-    removeLocation(state, index) {
-        state.locations_order = state.locations_order.filter((_, idx) => idx !== index);
+    [REMOVE_LOCATION](state, index) {
+        state.locations_order = state.locations_order.filter(
+            (_, idx) => idx !== index,
+        );
         delete state.locations_weather[location];
     },
 
-    updateLocationsOrder(state, new_order) {
+    [UPDATE_LOCATIONS_ORDER](state, new_order) {
         state.locations_order = new_order;
     },
 
-    updateLocationWeather(state, {location, new_weather_object}) {
-        Vue.set(state.locations_weather, location, new_weather_object ?? new Weather(location))
+    [UPDATE_LOCATION_WEATHER](state, { location, new_weather_object }) {
+        Vue.set(
+            state.locations_weather,
+            location,
+            new_weather_object ?? new Weather(location),
+        );
     },
 };
