@@ -2,6 +2,7 @@
     <div class="settings-card">
         <span class="settings-card__title"> Settings </span>
         <draggable
+            v-if="locations.length"
             v-model="locations"
             handle=".location-list-item__drag-icon"
             class="settings-card__title"
@@ -17,6 +18,7 @@
                 @remove="handleRemoveLocation(item)"
             />
         </draggable>
+        <empty-locations-list v-else />
         <input-location @submit="handleSubmitNewLocation" />
     </div>
 </template>
@@ -26,12 +28,14 @@ import draggable from "vuedraggable";
 
 import InputLocation from "@/components/Settings/InputLocation";
 import LocationListItem from "@/components/Settings/LocationListItem";
+import EmptyLocationsList from "@/components/Settings/EmptyLocationsList";
 
 export default {
     components: {
         draggable,
         InputLocation,
         LocationListItem,
+        EmptyLocationsList,
     },
     data() {
         return {

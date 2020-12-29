@@ -3,7 +3,7 @@
 
         <transition name="slide-fade" mode="out-in">
             <Settings v-if="showSettings" key="settings"/>
-            <Weather v-if="!showSettings" key="weather"/>
+            <Weather v-if="!showSettings" key="weather" @openSettings="handleClick"/>
         </transition>
         <aside class="right-bar">
             <span class="right-bar__fab-button" @click="handleClick">
