@@ -1,13 +1,13 @@
 import openWeatherResponseParser from "@/utils/openWeatherAPI/responseParser";
 import {
     fetchByLocationUrl,
-    // fetchByCoordinatesUrl,
+    fetchByCoordinatesUrl,
 } from "@/utils/openWeatherAPI/fetchUrl";
-
 import { fetchLocations, updateLocations } from "@/utils/localStorage";
 
 export default {
     async fetchWeather(context, location) {
+        fetchByCoordinatesUrl;
         console.log(fetchByLocationUrl(location))
         let response = await fetch(fetchByLocationUrl(location));
         let result_dict = {
