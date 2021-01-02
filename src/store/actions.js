@@ -28,7 +28,7 @@ export default {
         });
     },
 
-    async [GET_USER_LOCATIONS]({ dispatch, commit }) {
+    async [GET_USER_LOCATIONS]({ dispatch, commit, getters }) {
         let locations = fetchLocations();
         if (locations && locations.length > 0) {
             locations.forEach((location) =>
@@ -43,6 +43,10 @@ export default {
                     weather: new_weather_obj,
                 });
                 dispatch(SET_USER_LOCATIONS);
+            } else {
+                getters.geolocationErrorHandler.addErrorMessage(
+                    "Geolocation not allowed!"
+                );
             }
         }
     },
@@ -51,9 +55,18 @@ export default {
         updateLocations(context.getters.locations);
     },
 
-    async [SYNC_UPDATE_LOCATIONS]({ dispatch, commit }, { type, payload }) {
+    async [SYNC_UPDATE_LOCATIONS](
+        { dispatch, commit, getters },
+        { type, payload },
+    ) {
         switch (type) {
             case ADD_LOCATION: {
+                if (getters.locations.includes(payload)) {
+                    getters.inputLocationsErrorHandler.addErrorMessage(
+                        "This locations already exist!",
+                    );
+                    return;
+                }
                 let new_weather_obj = await buildWeatherByLocation(payload);
                 commit(ADD_LOCATION, {
                     value: new_weather_obj

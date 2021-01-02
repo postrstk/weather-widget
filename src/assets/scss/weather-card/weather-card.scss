@@ -1,6 +1,3 @@
-.card-wrapper {
-    display: inline-block;
-}
 .weather-card {
     display: flex;
     flex-direction: column;
@@ -52,6 +49,11 @@
         padding: 5px;
         .description__text {
             text-align: justify;
+        }
+
+        &--error {
+            color: $error-text-color;
+            font-size: 12pt;
         }
     }
 
